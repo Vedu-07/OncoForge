@@ -1,14 +1,26 @@
 import "./App.css";
 import Hero from "./components/Homepage/Hero";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import { Onboarding } from "./pages";
+import { Onboarding, Profile } from "./pages";
+import { useStateContext } from "./context";
+import { useEffect } from "react";
 function App() {
   // Conditional Rendering logic
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
+  const { user, authenticated, ready, login, currentUser } = useStateContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (ready && !authenticated) {
+      login(); 
+    } else if (user && !currentUser) {
+      navigate("/onboarding");
+    }
+  }, [ready, authenticated, user, currentUser, login, navigate]);
   
   return (
     <>
@@ -26,6 +38,7 @@ function App() {
             <Route path="/" element={<Hero />} />
             <Route path="/home" element={<Home/>} />
             <Route path="/onboarding" element={<Onboarding />}/>
+            <Route path="/profile" element={<Profile />} />
             {/* <Route path="/profile" element={<Profile />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/medical-records" element={<MedicalRecords />} />

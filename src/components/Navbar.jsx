@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-// import { usePrivy } from "@privy-io/react-auth";
-// import { useStateContext } from "../context"; // Adjust the import path
+import { usePrivy } from "@privy-io/react-auth";
+import { useStateContext } from "../context/index"; // Adjust the import path
 
 import  CustomButton  from "./CustomButton";
 import { menu, search } from "../assets";
@@ -13,42 +13,42 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  // const { ready, authenticated, login, user, logout } = usePrivy();
-  // const { fetchUsers, users, fetchUserRecords } = useStateContext();
+  const { ready, authenticated, login, user, logout } = usePrivy();
+  const { fetchUsers, users, fetchUserRecords } = useStateContext();
 
-//   const fetchUserInfo = useCallback(async () => {
-//     if (!user) return;
+  const fetchUserInfo = useCallback(async () => {
+    if (!user) return;
 
-//     try {
-//       await fetchUsers();
-//       const existingUser = users.find(
-//         (u) => u.createdBy === user.email.address,
-//       );
-//       if (existingUser) {
-//         await fetchUserRecords(user.email.address);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching user info:", error);
-//     }
-//   }, [user, fetchUsers, users, fetchUserRecords]);
+    try {
+      await fetchUsers();
+      const existingUser = users.find(
+        (u) => u.createdBy === user.email.address,
+      );
+      if (existingUser) {
+        await fetchUserRecords(user.email.address);
+      }
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  }, [user, fetchUsers, users, fetchUserRecords]);
 
-//   useEffect(() => {
-//     if (authenticated && user) {
-//       fetchUserInfo();
-//     }
-//   }, [authenticated, user, fetchUserInfo]);
+  useEffect(() => {
+    if (authenticated && user) {
+      fetchUserInfo();
+    }
+  }, [authenticated, user, fetchUserInfo]);
 
-//   const handleLoginLogout = useCallback(() => {
-//     if (authenticated) {
-//       logout();
-//     } else {
-//       login().then(() => {
-//         if (user) {
-//           fetchUserInfo();
-//         }
-//       });
-//     }
-//   }, [authenticated, login, logout, user, fetchUserInfo]);
+  const handleLoginLogout = useCallback(() => {
+    if (authenticated) {
+      logout();
+    } else {
+      login().then(() => {
+        if (user) {
+          fetchUserInfo();
+        }
+      });
+    }
+  }, [authenticated, login, logout, user, fetchUserInfo]);
 
   return (
     <div className="mt-5 flex flex-col-reverse justify-between  gap-6 md:flex-row">
@@ -60,11 +60,9 @@ const Navbar = () => {
       <div className=" flex-row justify-end gap-2 sm:flex">
         <CustomButton
           btnType="button"
-          title={"Login"}
-          styles={"bg-[#1dc071]"}
-                  //   title={authenticated ? "Log Out" : "Log In"}
-        //   styles={authenticated ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-        //   handleClick={handleLoginLogout}
+          title={authenticated ? "Log Out" : "Log In"}
+          styles={authenticated ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
+          handleClick={handleLoginLogout}
         />
       </div>
 

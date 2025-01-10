@@ -12,6 +12,7 @@
     "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "@privy-io/react-auth": "^1.99.0",
     "@tabler/icons-react": "^3.28.1",
     "dotenv": "^16.4.7",

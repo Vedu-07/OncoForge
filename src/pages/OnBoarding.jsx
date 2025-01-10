@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useStateContext } from "../context";
+import { useStateContext } from "../context";
 import { usePrivy } from "@privy-io/react-auth";
 
 const Onboarding = () => {
-//   const { createUser } = useStateContext();
+  const { createUser } = useStateContext();
   const [username, setUsername] = useState("");
   const [age, setAge] = useState("");
   const [location, setLocation] = useState("");
@@ -12,24 +12,24 @@ const Onboarding = () => {
   const { user } = usePrivy();
 
 //   console.log(user);
-//   const handleOnboarding = async (e) => {
-//     e.preventDefault();
-//     const userData = {
-//       username,
-//       age: parseInt(age, 10),
-//       location,
-//       folders: [],
-//       treatmentCounts: 0,
-//       folder: [],
-//       createdBy: user.email.address,
-//     };
+  const handleOnboarding = async (e) => {
+    e.preventDefault();
+    const userData = {
+      username,
+      age: parseInt(age, 10),
+      location,
+      folders: [],
+      treatmentCounts: 0,
+      folder: [],
+      createdBy: user.email.address,
+    };
 
-//     console.log(userData);
-//     const newUser = await createUser(userData);
-//     if (newUser) {
-//       navigate("/profile");
-//     }
-//   };
+    console.log(userData);
+    const newUser = await createUser(userData);
+    if (newUser) {
+      navigate("/profile");
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-900">
@@ -39,7 +39,7 @@ const Onboarding = () => {
           Welcome! Let's get started
         </h2>
         <form 
-        // onSubmit={handleOnboarding}
+        onSubmit={handleOnboarding}
         >
           <div className="mb-4">
             <label
@@ -67,7 +67,8 @@ const Onboarding = () => {
               value={age}
               onChange={(e) => setAge(e.target.value)}
               required
-              className="w-full rounded-lg bg-gray-700 px-4 py-3 text-neutral-400 focus:border-blue-600 focus:outline-none"
+              className="w-full rounded-lg bg-gray-700 px-4 py-3 text-neutral-400 focus:border-blue-600 focus:outline-none "
+              
             />
           </div>
           <div className="mb-4">
