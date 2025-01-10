@@ -2,6 +2,9 @@ import "./App.css";
 import Hero from "./components/Homepage/Hero";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import { Onboarding } from "./pages";
 function App() {
   // Conditional Rendering logic
   const location = useLocation();
@@ -17,11 +20,12 @@ function App() {
         )}
         
         <div className="mx-auto  flex-1 max-sm:w-full sm:pr-5">
-          {!isLandingPage && (<div>Navbar</div>)}
+          {!isLandingPage && (<div><Navbar/> </div>)}
 
           <Routes>
             <Route path="/" element={<Hero />} />
-            <Route path="/home" element={<div>Home</div>} />
+            <Route path="/home" element={<Home/>} />
+            <Route path="/onboarding" element={<Onboarding />}/>
             {/* <Route path="/profile" element={<Profile />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/medical-records" element={<MedicalRecords />} />
