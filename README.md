@@ -1,6 +1,6 @@
 # OncoForge  
 
-**Empowering Cancer Care with AI-Driven Insights**  
+## **Empowering Cancer Care with AI-Driven Insights**  
 
 OncoForge is an **AI-powered oncology platform** designed to provide **personalized treatment plans** for cancer patients. By analyzing uploaded medical reports, OncoForge offers tailored insights and organizes actionable tasks in an intuitive Kanban board format, bridging the gap between diagnosis and effective care.
 
@@ -55,7 +55,8 @@ OncoForge is an **AI-powered oncology platform** designed to provide **personali
 
 ## 📌 Installation  
 
-1. Clone the repository:  
+1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/oncoforge.git
    
@@ -65,4 +66,4 @@ OncoForge is an **AI-powered oncology platform** designed to provide **personali
    
    npm run dev
 
-2. Make Sure To Create .env File With Respect To .env.example
+3. Make Sure To Create .env File With Respect To .env.example
