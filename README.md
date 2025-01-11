@@ -42,7 +42,7 @@ OncoForge is an **AI-powered oncology platform** designed to provide **personali
 ---
 
 ## 🛠️ Tech Stack  
-
+<pre align = "center">
 | Technology       | Purpose                                    |
 |------------------|--------------------------------------------|
 | **React**        | Frontend framework for dynamic UI          |
@@ -50,7 +50,7 @@ OncoForge is an **AI-powered oncology platform** designed to provide **personali
 | **Tailwind CSS** | Modern styling for responsive design       |
 | **Gemini AI**    | AI engine for report analysis and insights |
 | **Privy**        | Secure handling of user-sensitive data     |
-
+</pre>
 ---
 
 ## 📌 Installation  
