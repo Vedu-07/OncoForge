@@ -7,21 +7,29 @@ const Profile = () => {
   const { user } = usePrivy();
 
   useEffect(() => {
-    if (!currentUser) {
-      fetchUserByEmail(user?.email?.address);
+    if (!currentUser && user?.email?.address) {
+      fetchUserByEmail(user.email.address);
     }
-  }, [currentUser, fetchUserByEmail]);
+  }, [currentUser, user, fetchUserByEmail]);
+
+  if (!user) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-lg text-gray-500">Authenticating...</div>
+      </div>
+    );
+  }
 
   if (!currentUser) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="text-lg text-gray-500">Loading...</div>
+        <div className="text-lg text-gray-500">Loading user data...</div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto mt-16 max-w-lg rounded-lg bg-[#1c1c24] p-6 shadow-lg">
+    <div className="mx-auto mt-16 max-w-lg rounded-lg bg-gray-800 p-6 shadow-lg">
       <div className="flex flex-col items-center">
         <div className="font-Inter text-2xl font-semibold text-green-300">O N C O F O R G E</div>
         <h1 className="mb-2 mt-3 text-xl font-semibold text-white">User Profile</h1>

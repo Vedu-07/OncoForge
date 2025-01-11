@@ -24,20 +24,27 @@ export const StateContextProvider = ({ children }) => {
 
   // Function to fetch user details by email
   const fetchUserByEmail = useCallback(async (email) => {
+    if (!email) {
+      console.error("No email provided for fetching user.");
+      return;
+    }
     try {
       const result = await db
         .select()
         .from(Users)
         .where(eq(Users.createdBy, email))
         .execute();
+      console.log("Fetched user result:", result); // Debugging log
       if (result.length > 0) {
         setCurrentUser(result[0]);
+      } else {
+        console.warn(`No user found for email: ${email}`);
       }
     } catch (error) {
       console.error("Error fetching user by email:", error);
     }
   }, []);
-
+  
   // Function to create a new user
   const createUser = useCallback(async (userData) => {
     try {
@@ -87,17 +94,26 @@ export const StateContextProvider = ({ children }) => {
   const updateRecord = useCallback(async (recordData) => {
     try {
       const { documentID, ...dataToUpdate } = recordData;
-      console.log(documentID, dataToUpdate);
       const updatedRecords = await db
         .update(Records)
         .set(dataToUpdate)
         .where(eq(Records.id, documentID))
-        .returning();
+        .returning()
+        .execute();
+      if (updatedRecords.length > 0) {
+        setRecords((prev) =>
+          prev.map((record) =>
+            record.id === documentID ? updatedRecords[0] : record
+          )
+        );
+        return updatedRecords[0];
+      }
     } catch (error) {
       console.error("Error updating record:", error);
       return null;
     }
   }, []);
+  
 
   return (
     <StateContext.Provider
