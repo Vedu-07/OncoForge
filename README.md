@@ -78,7 +78,7 @@ OncoForge is an **AI-powered oncology platform** designed to provide **personali
 </table>
 
 </div>
----
+
 
 ## 📌 Installation  
 
