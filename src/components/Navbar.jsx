@@ -64,7 +64,17 @@ const Navbar = () => {
           styles={authenticated ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
           handleClick={handleLoginLogout}
         />
+
+      <Link to={"/onboarding"} className=" flex-row justify-end gap-2 sm:flex">
+        <CustomButton
+          btnType="button"
+          title={"Onboard"}
+          styles={authenticated ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
+        />
+      </Link>
       </div>
+
+
 
       <div className="relative flex items-center justify-between sm:hidden">
         <div className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-[10px] bg-[#2c2f32] ml-2">

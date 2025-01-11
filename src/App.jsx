@@ -7,6 +7,11 @@ import Home from "./pages/Home";
 import { Onboarding, Profile } from "./pages";
 import { useStateContext } from "./context";
 import { useEffect } from "react";
+import MedicalRecords from "./pages/records/index"
+import SingleRecordDetails from "./pages/records/single-record-page";
+import ScreeningSchedule from "./pages/ScreeningSchedules";
+import ComingSoon from "./pages/ComingSoon";
+
 function App() {
   // Conditional Rendering logic
   const location = useLocation();
@@ -39,6 +44,10 @@ function App() {
             <Route path="/home" element={<Home/>} />
             <Route path="/onboarding" element={<Onboarding />}/>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/medical-records" element={<MedicalRecords />}/>
+            <Route path="/medical-records/:id" element={<SingleRecordDetails />}/>
+            <Route path="/screening-schedules" element={<ScreeningSchedule />} />
+            <Route path="/comingsoon" element={<ComingSoon/>} />
             {/* <Route path="/profile" element={<Profile />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/medical-records" element={<MedicalRecords />} />
